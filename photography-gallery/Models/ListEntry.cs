@@ -8,12 +8,14 @@ namespace photography_gallery.Models
     public class ListEntry
     {
         private string fullPath;
+        private string relativePath;
         private string displayName;
         private string type;
 
-        public ListEntry (string fullPath, string displayName, string type)
+        public ListEntry (string fullPath, string relativePath, string displayName, string type)
         {
             this.fullPath = fullPath;
+            this.relativePath = relativePath;
             this.displayName = displayName;
             this.type = type;
         }
@@ -22,6 +24,12 @@ namespace photography_gallery.Models
         {
             get { return fullPath; }
             set { fullPath = value; }
+        }
+
+        public string RelativePath
+        {
+            get { return relativePath; }
+            set { relativePath = value; }
         }
         public string DisplayName
         {

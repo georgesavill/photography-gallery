@@ -21,6 +21,7 @@
         {
             <div class="card">
                 <div class="card-body">
+                    <img src="@directory.RelativePath" style="width:100px" />
                     <button @onclick="(e => ChangeDirectory(directory.FullPath))" class="btn card-title">@directory.DisplayName</button>
                 </div>
             </div>
