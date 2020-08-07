@@ -3,15 +3,22 @@
 @using Microsoft.AspNetCore.Components.Web
 @inject ImageListService ListService
 @using photography_gallery.Models;
-<h3>DirectoryList</h3>
-
+@if (currentDirectory != "")
+{
+    <button @onclick="(e => GoBack())" class="btn btn-outline-secondary">back</button>
+    <br /><br />
+}
+else
+{
+    <br /><br /><br />
+}
 <div class="text-center">
     <div class="card-columns">
         @foreach (ListEntry directory in ListService.GetDirectoryList(currentDirectory))
         {
-            <div class="card">
+            <div class="card" @onclick="(e => ChangeDirectory(directory.FullPath))">
                 <div class="card-body">
-                    <button @onclick="(e => ChangeDirectory(directory.FullPath))" class="btn card-title">@directory.DisplayName</button>
+                    <div class=" card-title">@directory.DisplayName</div>
                 </div>
             </div>
         }
@@ -21,8 +28,8 @@
         {
             <div class="card">
                 <div class="card-body">
-                    <img src="@directory.RelativePath" style="width:100px" />
-                    <button @onclick="(e => ChangeDirectory(directory.FullPath))" class="btn card-title">@directory.DisplayName</button>
+                    <img src="@directory.RelativePath" style="width:100%" />
+                    <div class=" card-title">@directory.DisplayName</div>
                 </div>
             </div>
         }
@@ -37,9 +44,16 @@
         {
             // Open modal?
             return;
-        } else
+        }
+        else
         {
             currentDirectory = requestedDirectory.Split("\\images").Last();
         }
+    }
+    void GoBack()
+    {
+        string[] splitDirectory = currentDirectory.Split("\\");
+        Array.Resize(ref splitDirectory, splitDirectory.Length - 1);
+        currentDirectory = string.Join("\\", splitDirectory);
     }
 }
