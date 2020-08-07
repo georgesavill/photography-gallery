@@ -5,11 +5,13 @@
     ViewData["Title"] = "Home page";
 }
 
-<h1>Upload your photos here...</h1>
+<h5>Select photo to upload</h5>
+<br /><br />
 
-<form enctype="multipart/form-data" method="post" action="/uploadImages">
-    <input type="file" name="file" />
-    <input type="submit" />
-</form>
+      <form enctype="multipart/form-data" method="post" action="/uploadImages">
+          <input id="file" type="file" name="file" />
+          <br /><br />
+          <input type="submit" value="Upload" />
+      </form>
 
 <script src="_framework/blazor.server.js"></script>

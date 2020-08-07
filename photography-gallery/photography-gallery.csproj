@@ -13,6 +13,10 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\uploaded\" />
+  </ItemGroup>
+
 
 
 </Project>
