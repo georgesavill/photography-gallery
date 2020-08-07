@@ -23,7 +23,7 @@
     <div class="card-columns">
         @foreach (ListEntry directory in ListService.GetFileList(currentDirectory))
         {
-            <div class="card">
+            <div @onclick="(e => SelectImage(directory))" class="card" style="cursor:pointer" data-toggle="modal" data-target="#imagePreviewModal" >
                 <div class="card-body">
                     <img src="@directory.RelativePath" style="width:100%" />
                 </div>
@@ -31,8 +31,36 @@
         }
     </div>
 </div>
+
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" role="dialog" aria-labelledby="imagePreviewTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imagePreviewTitle">@if (selectedImage != null){@selectedImage.DisplayName}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        @if (selectedImage != null)
+                        {
+                            <div class="card-img" style = "background-image: url('@selectedImage.RelativePath.Replace("\\","/")');height:200px;"></div>
+                        }
+                        else
+                        {
+                            <div class="card-img"></div>
+                        }
+                        <div class="card-img"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @code {
     string currentDirectory = "";
+    ListEntry selectedImage;
 
     void ChangeDirectory(string requestedDirectory)
     {
@@ -51,5 +79,10 @@
         string[] splitDirectory = currentDirectory.Split("\\");
         Array.Resize(ref splitDirectory, splitDirectory.Length - 1);
         currentDirectory = string.Join("\\", splitDirectory);
+    }
+
+    void SelectImage(ListEntry clickedImage)
+    {
+        selectedImage = clickedImage;
     }
 }
