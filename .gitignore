@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Images directory
 photography-gallery/wwwroot/images/
+/photography-gallery/.editorconfig
