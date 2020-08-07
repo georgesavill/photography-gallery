@@ -71,14 +71,14 @@
         }
         else
         {
-            currentDirectory = requestedDirectory.Split("\\images").Last();
+            currentDirectory = requestedDirectory.Split("/images").Last();
         }
     }
     void GoBack()
     {
-        string[] splitDirectory = currentDirectory.Split("\\");
+        string[] splitDirectory = currentDirectory.Split("/");
         Array.Resize(ref splitDirectory, splitDirectory.Length - 1);
-        currentDirectory = string.Join("\\", splitDirectory);
+        currentDirectory = string.Join("/", splitDirectory);
     }
 
     void SelectImage(ListEntry clickedImage)
