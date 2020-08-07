@@ -21,8 +21,7 @@
     
     void ChangeDirectory(string requestedDirectory)
     {
-        var splitPath = requestedDirectory.Split("\\images");
-        currentDirectory = splitPath[splitPath.Length-1];
+        currentDirectory = requestedDirectory.Split("\\images").Last();
     }
 
 }
