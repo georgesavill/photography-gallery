@@ -2,25 +2,26 @@
 @using photography_gallery.Services
 @using Microsoft.AspNetCore.Components.Web
 @inject ImageListService ListService
+@using photography_gallery.Models;
 <h3>DirectoryList</h3>
 
 <div class="text-center">
     <div class="card-columns">
-        @foreach (string directory in ListService.GetDirectoryList(currentDirectory))
+        @foreach (ListEntry directory in ListService.GetDirectoryList(currentDirectory))
         {
             <div class="card">
                 <div class="card-body">
-                    <button @onclick="(e => ChangeDirectory(directory))" class="btn card-title">@directory</button>
+                    <button @onclick="(e => ChangeDirectory(directory.FullPath))" class="btn card-title">@directory.DisplayName</button>
                 </div>
             </div>
         }
     </div>
     <div class="card-columns">
-        @foreach (string directory in ListService.GetFileList(currentDirectory))
+        @foreach (ListEntry directory in ListService.GetFileList(currentDirectory))
         {
             <div class="card">
                 <div class="card-body">
-                    <button @onclick="(e => ChangeDirectory(directory))" class="btn card-title">@directory</button>
+                    <button @onclick="(e => ChangeDirectory(directory.FullPath))" class="btn card-title">@directory.DisplayName</button>
                 </div>
             </div>
         }
@@ -28,10 +29,16 @@
 </div>
 @code {
     string currentDirectory = "";
-    
+
     void ChangeDirectory(string requestedDirectory)
     {
-        currentDirectory = requestedDirectory.Split("\\images").Last();
+        if (requestedDirectory.Split(".").Last() == "jpg")
+        {
+            // Open modal?
+            return;
+        } else
+        {
+            currentDirectory = requestedDirectory.Split("\\images").Last();
+        }
     }
-
 }

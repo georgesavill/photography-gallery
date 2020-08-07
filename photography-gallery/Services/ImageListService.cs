@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using photography_gallery.Models;
 
 namespace photography_gallery.Services
 {
@@ -16,15 +17,27 @@ namespace photography_gallery.Services
 
         public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public string[] GetDirectoryList(string subDirectory)
+        public List<ListEntry> GetDirectoryList(string subDirectory)
         {
-            string rootDirectory = Path.Combine(WebHostEnvironment.WebRootPath, "images") + subDirectory;
-            return Directory.GetDirectories(rootDirectory, "*.*", SearchOption.TopDirectoryOnly);
+            List<ListEntry> returnedDirectoryList = new List<ListEntry>(); 
+            string rootDirectory = Path.Combine(WebHostEnvironment.WebRootPath, "images") + "\\" + subDirectory;
+            string[] directoryList = Directory.GetDirectories(rootDirectory, "*.*", SearchOption.TopDirectoryOnly);
+            foreach (string entry in directoryList)
+            {
+                returnedDirectoryList.Add(new ListEntry(entry, entry.Split("\\").Last(), "dir"));
+            }
+            return returnedDirectoryList;
         }
-        public string[] GetFileList(string subDirectory)
+        public List<ListEntry> GetFileList(string subDirectory)
         {
-            string rootDirectory = Path.Combine(WebHostEnvironment.WebRootPath, "images") + subDirectory;
-            return Directory.GetFiles(rootDirectory, "*.jpg", SearchOption.TopDirectoryOnly);
+            List<ListEntry> returnedFileList = new List<ListEntry>();
+            string rootDirectory = Path.Combine(WebHostEnvironment.WebRootPath, "images") + "\\" + subDirectory;
+            string[] fileList = Directory.GetFiles(rootDirectory, "*.jpg", SearchOption.TopDirectoryOnly);
+            foreach (string entry in fileList)
+            {
+                returnedFileList.Add(new ListEntry(entry, entry.Split("\\").Last(), "file"));
+            }
+            return returnedFileList;
         }
     }
 }
