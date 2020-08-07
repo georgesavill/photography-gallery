@@ -21,5 +21,10 @@ namespace photography_gallery.Services
             string rootDirectory = Path.Combine(WebHostEnvironment.WebRootPath, "images") + subDirectory;
             return Directory.GetDirectories(rootDirectory, "*.*", SearchOption.TopDirectoryOnly);
         }
+        public string[] GetFileList(string subDirectory)
+        {
+            string rootDirectory = Path.Combine(WebHostEnvironment.WebRootPath, "images") + subDirectory;
+            return Directory.GetFiles(rootDirectory, "*.jpg", SearchOption.TopDirectoryOnly);
+        }
     }
 }
