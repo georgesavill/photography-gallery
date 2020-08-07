@@ -6,19 +6,16 @@
 @if (currentDirectory != "")
 {
     <button @onclick="(e => GoBack())" class="btn btn-outline-secondary">back</button>
-    <br /><br />
 }
-else
-{
-    <br /><br /><br />
-}
+<br />
+<br />
 <div class="text-center">
     <div class="card-columns">
         @foreach (ListEntry directory in ListService.GetDirectoryList(currentDirectory))
         {
-            <div class="card" @onclick="(e => ChangeDirectory(directory.FullPath))">
+            <div class="card btn btn-outline-primary" style="cursor:pointer" @onclick="(e => ChangeDirectory(directory.FullPath))">
                 <div class="card-body">
-                    <div class=" card-title">@directory.DisplayName</div>
+                    <h5>@directory.DisplayName</h5>
                 </div>
             </div>
         }
@@ -29,7 +26,6 @@ else
             <div class="card">
                 <div class="card-body">
                     <img src="@directory.RelativePath" style="width:100%" />
-                    <div class=" card-title">@directory.DisplayName</div>
                 </div>
             </div>
         }
