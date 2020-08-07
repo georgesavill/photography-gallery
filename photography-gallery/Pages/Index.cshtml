@@ -1,23 +1,10 @@
 ﻿@page
+@using photography_gallery.Components
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-@using photography_gallery.Services
-@inject ImageListService  ListService
+@(await Html.RenderComponentAsync<DirectoryList>(RenderMode.ServerPrerendered))
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <div class="card-columns">
-        @foreach (string directory in ListService.GetDirectoryList())
-        {
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">@directory</h5>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+<script src="_framework/blazor.server.js"></script>
