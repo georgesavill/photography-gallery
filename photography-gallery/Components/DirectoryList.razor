@@ -33,7 +33,7 @@
 </div>
 
     <div class="modal fade" id="imagePreviewModal" tabindex="-1" role="dialog" aria-labelledby="imagePreviewTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="imagePreviewTitle">@if (selectedImage != null){@selectedImage.DisplayName}</h5>
@@ -45,7 +45,7 @@
                     <div class="card">
                         @if (selectedImage != null)
                         {
-                            <div class="card-img" style = "background-image: url('@selectedImage.RelativePath.Replace("\\","/")');height:200px;"></div>
+                        <img class="card-img" src="@selectedImage.RelativePath.Replace("\\","/")"/>
                         }
                         else
                         {
