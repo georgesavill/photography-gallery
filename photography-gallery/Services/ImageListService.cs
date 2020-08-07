@@ -16,9 +16,10 @@ namespace photography_gallery.Services
 
         public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public string GetImagesDirectory()
+        public string[] GetDirectoryList()
         {
-            return Path.Combine(WebHostEnvironment.WebRootPath, "images");
+            var rootDirectory = Path.Combine(WebHostEnvironment.WebRootPath, "images");
+            return Directory.GetDirectories(rootDirectory, "*.*", SearchOption.TopDirectoryOnly);
         }
     }
 }
