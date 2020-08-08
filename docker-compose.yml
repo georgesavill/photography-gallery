@@ -1,0 +1,7 @@
+version: '3'
+services:
+  photo-gallery:
+    image: photo-gallery
+    volumes:
+      - /photos/:/app/wwwroot/images
+    restart: always
