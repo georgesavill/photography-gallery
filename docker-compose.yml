@@ -3,5 +3,7 @@ services:
   photo-gallery:
     image: photo-gallery
     volumes:
-      - /photos/:/app/wwwroot/images
+      - /path/to/photos:/app/wwwroot/images
+    ports:
+      - 8080:80
     restart: always
