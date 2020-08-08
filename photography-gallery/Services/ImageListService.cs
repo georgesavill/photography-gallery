@@ -24,7 +24,7 @@ namespace photography_gallery.Services
             string[] directoryList = Directory.GetDirectories(rootDirectory, "*.*", SearchOption.TopDirectoryOnly);
             foreach (string entry in directoryList)
             {
-                returnedDirectoryList.Add(new ListEntry(entry, entry.Split("wwwroot").Last(), entry.Split("/").Last(), "dir"));
+                returnedDirectoryList.Add(CreateListEntry(entry, "dir"));
             }
             return returnedDirectoryList;
         }
@@ -35,9 +35,23 @@ namespace photography_gallery.Services
             string[] fileList = Directory.GetFiles(rootDirectory, "*.jpg", SearchOption.TopDirectoryOnly);
             foreach (string entry in fileList)
             {
-                returnedFileList.Add(new ListEntry(entry, entry.Split("wwwroot").Last(), entry.Split("/").Last(), "file"));
+            if (entry.IndexOf("_preview.") == -1 && entry.IndexOf("_thumbnail.") == -1)
+                {
+                    returnedFileList.Add(CreateListEntry(entry, "file"));
+                }
             }
             return returnedFileList;
+        }
+
+        static ListEntry CreateListEntry(string entry, string type)
+        {
+            string relativePath = entry.Split("wwwroot").Last();
+            string fileName = relativePath.Split(".").First();
+            string fileExtension = relativePath.Split(".").Last();
+            string thumnailPath = fileName + "_thumbnail." + fileExtension;
+            string previewPath = fileName + "_preview." + fileExtension;
+
+            return new ListEntry(entry, relativePath, thumnailPath, previewPath, entry.Split("/").Last(), type);
         }
     }
 }

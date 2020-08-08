@@ -9,13 +9,17 @@ namespace photography_gallery.Models
     {
         private string fullPath;
         private string relativePath;
+        private string thumbnailPath;
+        private string previewPath;
         private string displayName;
         private string type;
 
-        public ListEntry (string fullPath, string relativePath, string displayName, string type)
+        public ListEntry(string fullPath, string relativePath, string thumbnailPath, string previewPath, string displayName, string type)
         {
             this.fullPath = fullPath;
             this.relativePath = relativePath;
+            this.thumbnailPath = thumbnailPath;
+            this.previewPath = previewPath;
             this.displayName = displayName;
             this.type = type;
         }
@@ -30,6 +34,16 @@ namespace photography_gallery.Models
         {
             get { return relativePath; }
             set { relativePath = value; }
+        }
+        public string ThumbnailPath
+        {
+            get { return thumbnailPath; }
+            set { thumbnailPath = value; }
+        }
+        public string PreviewPath
+        {
+            get { return previewPath; }
+            set { previewPath = value; }
         }
         public string DisplayName
         {

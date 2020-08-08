@@ -25,7 +25,7 @@
         {
             <div @onclick="(e => SelectImage(directory))" class="card" style="cursor:pointer" data-toggle="modal" data-target="#imagePreviewModal" >
                 <div class="card-body">
-                    <img src="@directory.RelativePath" style="width:100%" />
+                    <img src="@directory.ThumbnailPath" style="width:100%" />
                 </div>
             </div>
         }
@@ -45,7 +45,7 @@
                     <div class="card">
                         @if (selectedImage != null)
                         {
-                        <img class="card-img" src="@selectedImage.RelativePath"/>
+                        <img class="card-img" src="@selectedImage.PreviewPath"/>
                         }
                         else
                         {
